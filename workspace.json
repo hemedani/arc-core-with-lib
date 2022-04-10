@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "arc": "apps/arc",
+    "arc-e2e": "apps/arc-e2e"
+  }
+}
