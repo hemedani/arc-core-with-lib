@@ -23,7 +23,7 @@ export const wareTypeOutRel:Record<string,OutRelation> = {
   },
 };
 
-export const wareInRel = {};
+export const wareTypeInRel = {};
 
 addPureModel("wareType", pureWareTypeObj);
 
