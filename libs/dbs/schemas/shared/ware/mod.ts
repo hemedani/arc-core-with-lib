@@ -11,7 +11,7 @@ import {
 export const pureWareObj = {
 name: string(),
 brand: string(),
-ptice: number(),
+price: number(),
 description: optional(string()),
 };
 
