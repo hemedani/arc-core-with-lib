@@ -52,6 +52,7 @@ const addWareFn: ActFn = async (body) => {
             description: foundWareType!.description,
         },
     });
+    // TODO add ware to QQ To add WareTYpe
 };
 setAct({
     type: "dynamic",
@@ -62,6 +63,8 @@ setAct({
 });
 
 /////////////////// WareType//////////////////////
+//
+// addWareType
 const addWareTypeValidator = () => {
     return object({
         set: object({
@@ -73,8 +76,6 @@ const addWareTypeValidator = () => {
 };
 
 const addWareTypeFn: ActFn = async (body) => {
-    console.log(body.details);
-
     const {
         set: { name, description },
         get,
@@ -92,6 +93,34 @@ setAct({
     actName: "addWareType",
     validator: addWareTypeValidator(),
 });
+//// updateWareType
+const updateWareTypeValidator = () => {
+    return object({
+        set: object({
+            _id: string(),
+            name: optional(string()),
+            description: optional(string()),
+        }),
+        get: selectStruct("ware", { ware: 1 }),
+    });
+};
 
+const updateWareTypeFn: ActFn = async (body) => {
+    const {
+        set: { _id, name, description },
+        get,
+    } = body.details;
+    const foundedWareType = await wareType.findOne({ _id: new ObjectID(_id) });
+    !foundedWareType && throwError("wareType not exist");
+    // TODO QueryQueue for update for example ware
+    await wareType.updateOne({ _id: new ObjectID(_id) }, { name, description });
+};
+setAct({
+    type: "dynamic",
+    schema: "wareType",
+    fn: updateWareTypeFn,
+    actName: "updateWareType",
+    validator: updateWareTypeValidator(),
+});
 /////////////////////////////////////////////////////////
 runServer({ port: 8585, playground: true });
