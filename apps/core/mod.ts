@@ -9,7 +9,7 @@ import {
   selectStruct,
   setAct,
   string,
-} from "/Users/syd/work/arc/lesan/mod.ts";
+} from "/home/zahra/work/lesan/mod.ts";
 import {
   createCoreCountrySchema,
   createCoreUserSchema,

@@ -1,8 +1,6 @@
 import {
-  addInrelations,
   addOutRelations,
   addPureModel,
-  InRelation,
   optional,
   OutRelation,
   string,

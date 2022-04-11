@@ -9,7 +9,7 @@ import {
   number,
   optional,
   string,
-} from "/Users/syd/work/arc/lesan/mod.ts";
+} from "/home/zahra/work/lesan/mod.ts";
 
 const level = enums(["Admin", "Editor", "Author", "Ghost", "Normal"]);
 const gender = enums(["Male", "Female"]);

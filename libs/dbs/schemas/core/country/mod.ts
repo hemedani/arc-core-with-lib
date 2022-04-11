@@ -10,7 +10,7 @@ import {
   optional,
   OutRelation,
   string,
-} from "/Users/syd/work/arc/lesan/mod.ts";
+} from "/home/zahra/work/lesan/mod.ts";
 import db from "../../../db.ts";
 import {
   countryOutRel as sharedCountryOutRel,
