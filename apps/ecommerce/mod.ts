@@ -123,4 +123,4 @@ setAct({
     validator: updateWareTypeValidator(),
 });
 /////////////////////////////////////////////////////////
-runServer({ port: 8585, playground: true });
+runServer({ port: 8574, playground: true });

@@ -12,7 +12,6 @@ import {
     string,
 } from "/home/zahra/work/lesan/mod.ts";
 import { createCoreCountrySchema, createCoreUserSchema } from "../../libs/dbs/schemas/core/mod.ts";
-// import { addWareTypeFn, addWareTypeValidator } from "../ecommerce/mod.ts";
 
 const country = createCoreCountrySchema();
 const user = createCoreUserSchema();
@@ -105,14 +104,14 @@ setAct({
 
 ////// set Service For ecommerce //////////
 ////  url Base
-// setService("ecommerce", "http://localhost:8584/lesan");
+// setService("ecommerce", "http://localhost:8574/lesan");
 
 /// set Service
 //  Act Base
 // setService("ecommerce", {
 //    dynamic: {
 //        wareType: {
-//            addWareType: {
+//            addWareTypee: {
 //                validator: addWareTypeValidator(),
 //                fn: addWareTypeFn,
 //            },
