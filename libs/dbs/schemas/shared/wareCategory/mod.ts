@@ -26,7 +26,7 @@ export const wareCategoryInRel: Record<string, InRelation> = {
     },
 };
 
-addPureModel("wareCategory", wareCategoryPureObj);
+addPureModel("wareCategory", pureWareCategoryObj);
 
 addOutRelations({
     schemaName: "wareCategory",

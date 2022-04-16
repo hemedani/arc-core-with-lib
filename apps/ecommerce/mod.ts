@@ -27,7 +27,7 @@ const addWareValidator = () => {
             description: optional(string()),
             wareTypeId: string(),
         }),
-        get: selectStruct("ware", { wareType: 1 }),
+        get: selectStruct("ware", { wareType: { _id: 1, name: 1 } }),
     });
 };
 
@@ -41,7 +41,7 @@ const addWareFn: ActFn = async (body) => {
     const foundWareType = await wareType.findOne({ _id: new ObjectID(wareTypeId) });
     !foundWareType && throwError("wareType not exist");
 
-    await ware.insertOne({
+    const inWare = await ware.insertOne({
         name,
         description,
         price,
@@ -52,7 +52,9 @@ const addWareFn: ActFn = async (body) => {
             description: foundWareType!.description,
         },
     });
-    // TODO add ware to QQ To add WareTYpe
+    return Object.keys(get).length != 0
+        ? await ware.findOne({ _id: new ObjectID(inWare) }, { projection: get })
+        : { _id: new ObjectID(inWare) }; // TODO add ware to QQ To add WareTYpe
 };
 setAct({
     type: "dynamic",
@@ -81,10 +83,14 @@ const addWareTypeFn: ActFn = async (body) => {
         get,
     } = body.details;
 
-    await wareType.insertOne({
+    const inWareType = await wareType.insertOne({
         name,
         description,
     });
+    console.log(get);
+    return Object.keys(get).length != 0
+        ? await wareType.findOne({ _id: new ObjectID(inWareType) }, { projection: get })
+        : { _id: inWareType };
 };
 setAct({
     type: "dynamic",
@@ -113,7 +119,10 @@ const updateWareTypeFn: ActFn = async (body) => {
     const foundedWareType = await wareType.findOne({ _id: new ObjectID(_id) });
     !foundedWareType && throwError("wareType not exist");
     // TODO QueryQueue for update for example ware
-    await wareType.updateOne({ _id: new ObjectID(_id) }, { name, description });
+    const upWareType = await wareType.updateOne({ _id: new ObjectID(_id) }, { name, description });
+    return Object.keys(get).length != 0
+        ? await wareType.findOne({ _id: new ObjectID(upWareType) }, { projection: get })
+        : { _id: upWareType };
 };
 setAct({
     type: "dynamic",
