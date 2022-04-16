@@ -1,3 +1,4 @@
+import db from "../../../db.ts";
 import {
   addInrelations,
   addOutRelations,
@@ -7,12 +8,11 @@ import {
   optional,
   OutRelation,
   string,
-} from "/home/zahra/work/lesan/mod.ts";
-import db from "../../../db.ts";
+} from "../../../deps.ts";
 
 import {
-  wareTypeOutRel as sharedWareTypeOutRel,
   pureWareTypeObj as sharedPureWareTypeObj,
+  wareTypeOutRel as sharedWareTypeOutRel,
 } from "../../shared/mod.ts";
 
 export const createEcommerceWareTypeSchema = () => {

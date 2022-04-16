@@ -8,7 +8,7 @@ import {
   optional,
   OutRelation,
   string,
-} from "/home/zahra/work/lesan/mod.ts";
+} from "../../../deps.ts";
 
 export const pureCountryObj = {
   name: string(),

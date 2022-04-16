@@ -5,19 +5,16 @@ import {
   number,
   optional,
   string,
-} from "/home/zahra/work/lesan/mod.ts";
-
+} from "../../../deps.ts";
 
 export const pureWareObj = {
-name: string(),
-brand: string(),
-price: number(),
-description: optional(string()),
+  name: string(),
+  brand: string(),
+  price: number(),
+  description: optional(string()),
 };
 
-
-
-export const wareInRel:Record<string,InRelation> = {
+export const wareInRel: Record<string, InRelation> = {
   warType: {
     schemaName: "wareType",
     type: "one",
@@ -32,5 +29,3 @@ addInrelations({
   schemaName: "ware",
   inrelation: wareInRel,
 });
-
-

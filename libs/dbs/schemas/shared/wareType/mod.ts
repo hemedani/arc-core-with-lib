@@ -4,19 +4,17 @@ import {
   optional,
   OutRelation,
   string,
-} from "/home/zahra/work/lesan/mod.ts";
-
+} from "../../../deps.ts";
 
 export const pureWareTypeObj = {
-name: string(),
-description: optional(string()),
+  name: string(),
+  description: optional(string()),
 };
 
-
-
-export const wareTypeOutRel:Record<string,OutRelation> = {
+export const wareTypeOutRel: Record<string, OutRelation> = {
   wares: {
-    schemaName: "ware",    number: 50,
+    schemaName: "ware",
+    number: 50,
     sort: { field: "_id", order: "desc" },
   },
 };
@@ -29,7 +27,3 @@ addOutRelations({
   schemaName: "wareType",
   outrelation: wareTypeOutRel,
 });
-
-
-
-

@@ -1,3 +1,4 @@
+import db from "../../../db.ts";
 import {
   addInrelations,
   addOutRelations,
@@ -10,8 +11,7 @@ import {
   optional,
   OutRelation,
   string,
-} from "/home/zahra/work/lesan/mod.ts";
-import db from "../../../db.ts";
+} from "../../../deps.ts";
 import {
   countryOutRel as sharedCountryOutRel,
   pureCountryObj as sharedPureCountryObj,

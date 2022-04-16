@@ -1,34 +1,34 @@
+import db from "../../../db.ts";
 import {
   addInrelations,
   addOutRelations,
   addPureModel,
   createStruct,
   Infer,
+  InRelation,
   number,
   optional,
   string,
-  InRelation
-} from "/home/zahra/work/lesan/mod.ts";
-import db from "../../../db.ts";
+} from "../../../deps.ts";
 
 import {
-  wareInRel as sharedWareInRel,
   pureWareObj as sharedPureWareObj,
+  wareInRel as sharedWareInRel,
 } from "../../shared/mod.ts";
 
 export const createEcommerceWareSchema = () => {
   const warePureObj: Partial<typeof sharedPureWareObj> = {
     name: string(),
     brand: string(),
-    price:number(),
+    price: number(),
     description: optional(string()),
   };
 
-  const wareInRel:Partial<typeof sharedWareInRel> = {
+  const wareInRel: Partial<typeof sharedWareInRel> = {
     warType: {
-     schemaName: "wareType",
-     type: "one",
-    }
+      schemaName: "wareType",
+      type: "one",
+    },
   };
 
   const outRelWare = {};
