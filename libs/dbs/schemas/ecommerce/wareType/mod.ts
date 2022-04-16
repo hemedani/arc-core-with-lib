@@ -1,14 +1,6 @@
+import { ecommerceApp } from "../../../../../apps/ecommerce/mod.ts";
 import db from "../../../db.ts";
-import {
-  addInrelations,
-  addOutRelations,
-  addPureModel,
-  createStruct,
-  Infer,
-  optional,
-  OutRelation,
-  string,
-} from "../../../deps.ts";
+import { Infer, optional, OutRelation, string } from "../../../deps.ts";
 
 import {
   pureWareTypeObj as sharedPureWareTypeObj,
@@ -16,6 +8,13 @@ import {
 } from "../../shared/mod.ts";
 
 export const createEcommerceWareTypeSchema = () => {
+  const {
+    addInrelations,
+    addOutRelations,
+    addPureModel,
+    createStruct,
+  } = ecommerceApp.schemas;
+
   const wareTypePureObj: Partial<typeof sharedPureWareTypeObj> = {
     name: string(),
     description: optional(string()),

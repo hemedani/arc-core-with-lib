@@ -4,20 +4,21 @@ import {
 } from "../../libs/dbs/schemas/core/mod.ts";
 import { ecommerceMainActs } from "../ecommerce/mod.ts";
 import { userInp } from "./declarations/selectInp.ts";
-import {
-  ActFn,
-  getAtcsWithServices,
-  getDynamicActs,
-  getSchemas,
-  MongoClient,
-  number,
-  object,
-  runServer,
-  selectStruct,
+import { ActFn, lesan, MongoClient, number, object, string } from "./deps.ts";
+
+export const coreApp = lesan();
+
+const {
   setAct,
   setService,
-  string,
-} from "./deps.ts";
+  getAtcsWithServices,
+  getDynamicActs,
+} = coreApp.acts;
+
+const {
+  selectStruct,
+  getSchemas,
+} = coreApp.schemas;
 
 const client = new MongoClient();
 
@@ -119,6 +120,6 @@ setAct({
 //    static: {},
 // });
 
-setService("ecommerce", "http://localhost:8574/lesan");
-// setService("ecommerce", ecommerceMainActs);
-runServer({ port: 8585, playground: false, db, typeGeneration: true });
+// setService("ecommerce", "http://localhost:8574/lesan");
+setService("ecommerce", ecommerceMainActs);
+coreApp.runServer({ port: 8585, playground: false, db, typeGeneration: true });

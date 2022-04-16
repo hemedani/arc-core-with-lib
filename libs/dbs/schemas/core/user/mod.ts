@@ -1,12 +1,8 @@
 import {
-  addInrelations,
-  addPureModel,
   array,
   boolean,
-  createStruct,
   date,
   enums,
-  getPureModel,
   Infer,
   InRelation,
   number,
@@ -14,6 +10,7 @@ import {
   string,
 } from "../../../deps.ts";
 
+import { coreApp } from "../../../../../apps/core/mod.ts";
 import db from "../../../db.ts";
 import {
   pureUserObj as sharedPureUser,
@@ -21,6 +18,12 @@ import {
 } from "../../shared/mod.ts";
 
 export const createCoreUserSchema = () => {
+  const {
+    addInrelations,
+    addPureModel,
+    createStruct,
+  } = coreApp.schemas;
+
   const level = enums(["Admin", "Editor", "Author", "Ghost", "Normal"]);
   const gender = enums(["Male", "Female"]);
 

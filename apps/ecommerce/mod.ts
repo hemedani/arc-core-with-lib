@@ -5,17 +5,28 @@ import {
 import { ObjectID } from "../../libs/dbs/utils/deps.ts";
 import {
   ActFn,
-  getMainActs,
+  lesan,
   MongoClient,
   number,
   object,
   optional,
-  runServer,
-  selectStruct,
-  setAct,
   string,
-  throwError,
 } from "./deps.ts";
+
+const throwError = (msg?: string) => {
+  throw new Error(msg);
+};
+
+export const ecommerceApp = lesan();
+
+const {
+  setAct,
+  getMainActs,
+} = ecommerceApp.acts;
+
+const {
+  selectStruct,
+} = ecommerceApp.schemas;
 
 const client = new MongoClient();
 
@@ -140,4 +151,9 @@ setAct({
 
 export const ecommerceMainActs = getMainActs();
 
-runServer({ port: 8574, playground: true, db, typeGeneration: true });
+ecommerceApp.runServer({
+  port: 8574,
+  playground: true,
+  db,
+  typeGeneration: true,
+});

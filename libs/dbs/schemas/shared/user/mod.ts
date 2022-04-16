@@ -1,6 +1,4 @@
 import {
-  addInrelations,
-  addPureModel,
   array,
   boolean,
   date,
@@ -36,9 +34,10 @@ export const userInRel: Record<string, InRelation> = {
 };
 export const userOutRel = {};
 
-addPureModel("user", pureUserObj);
-
-addInrelations({
-  schemaName: "user",
-  inrelation: userInRel,
-});
+// comment for know because we want create it whenever we create a new server for it
+// addPureModel("user", pureUserObj);
+//
+// addInrelations({
+//   schemaName: "user",
+//   inrelation: userInRel,
+// });

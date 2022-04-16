@@ -1,10 +1,4 @@
-import {
-  addOutRelations,
-  addPureModel,
-  optional,
-  OutRelation,
-  string,
-} from "../../../deps.ts";
+import { optional, OutRelation, string } from "../../../deps.ts";
 
 export const pureWareTypeObj = {
   name: string(),
@@ -21,9 +15,10 @@ export const wareTypeOutRel: Record<string, OutRelation> = {
 
 export const wareTypeInRel = {};
 
-addPureModel("wareType", pureWareTypeObj);
-
-addOutRelations({
-  schemaName: "wareType",
-  outrelation: wareTypeOutRel,
-});
+// comment for know because we want create it whenever we create a new server for it
+// addPureModel("wareType", pureWareTypeObj);
+//
+// addOutRelations({
+//   schemaName: "wareType",
+//   outrelation: wareTypeOutRel,
+// });

@@ -1,7 +1,4 @@
 import {
-  addInrelations,
-  addOutRelations,
-  addPureModel,
   array,
   number,
   object,
@@ -30,14 +27,15 @@ export const countryOutRel: Record<string, OutRelation> = {
   },
 };
 
-addPureModel("country", pureCountryObj);
-
-addOutRelations({
-  schemaName: "country",
-  outrelation: countryOutRel,
-});
-
-addInrelations({
-  schemaName: "country",
-  inrelation: countryInRel,
-});
+// comment for know because we want create it whenever we create a new server for it
+// addPureModel("country", pureCountryObj);
+//
+// addOutRelations({
+//   schemaName: "country",
+//   outrelation: countryOutRel,
+// });
+//
+// addInrelations({
+//   schemaName: "country",
+//   inrelation: countryInRel,
+// });

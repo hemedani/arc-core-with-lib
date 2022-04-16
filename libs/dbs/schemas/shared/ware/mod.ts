@@ -1,11 +1,4 @@
-import {
-  addInrelations,
-  addPureModel,
-  InRelation,
-  number,
-  optional,
-  string,
-} from "../../../deps.ts";
+import { InRelation, number, optional, string } from "../../../deps.ts";
 
 export const pureWareObj = {
   name: string(),
@@ -23,9 +16,10 @@ export const wareInRel: Record<string, InRelation> = {
 
 export const wareOutRel = {};
 
-addPureModel("ware", pureWareObj);
-
-addInrelations({
-  schemaName: "ware",
-  inrelation: wareInRel,
-});
+// comment for know because we want create it whenever we create a new server for it
+// addPureModel("ware", pureWareObj);
+//
+// addInrelations({
+//   schemaName: "ware",
+//   inrelation: wareInRel,
+// });
