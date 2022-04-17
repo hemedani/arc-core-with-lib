@@ -1,7 +1,4 @@
-import {
-  createEcommerceWareSchema,
-  createEcommerceWareTypeSchema,
-} from "../../libs/dbs/schemas/ecommerce/mod.ts";
+import { wares, wareTypes } from "../../libs/dbs/schemas/ecommerce/mod.ts";
 import { ObjectID } from "../../libs/dbs/utils/deps.ts";
 import {
   ActFn,
@@ -19,6 +16,9 @@ const throwError = (msg?: string) => {
 
 export const ecommerceApp = lesan();
 
+const ware = wares();
+const wareType = wareTypes();
+
 const {
   setAct,
   getMainActs,
@@ -32,10 +32,7 @@ const client = new MongoClient();
 
 // Connecting to a Local Database
 await client.connect("mongodb://localhost:27017/arc");
-const db = client.database("core");
-
-const ware = createEcommerceWareSchema();
-const wareType = createEcommerceWareTypeSchema();
+const db = client.database("ecommerce");
 
 ///////////////////// Ware//////////////////////
 //
@@ -138,7 +135,10 @@ const updateWareTypeFn: ActFn = async (body) => {
   const foundedWareType = await wareType.findOne({ _id: new ObjectID(_id) });
   !foundedWareType && throwError("wareType not exist");
   // TODO QueryQueue for update for example ware
-  await wareType.updateOne({ _id: new ObjectID(_id) }, { name, description });
+  await wareType.updateOne({ _id: new ObjectID(_id) }, {
+    name,
+    description,
+  });
 };
 setAct({
   type: "dynamic",
@@ -148,12 +148,11 @@ setAct({
   validator: updateWareTypeValidator(),
 });
 /////////////////////////////////////////////////////////
-
+ecommerceApp.odm.setDb(db);
 export const ecommerceMainActs = getMainActs();
 
 ecommerceApp.runServer({
   port: 8574,
   playground: true,
-  db,
   typeGeneration: true,
 });

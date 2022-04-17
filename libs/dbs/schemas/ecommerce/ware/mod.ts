@@ -7,44 +7,26 @@ import {
   wareInRel as sharedWareInRel,
 } from "../../shared/mod.ts";
 
-export const createEcommerceWareSchema = () => {
-  const {
-    addInrelations,
-    addOutRelations,
-    addPureModel,
-    createStruct,
-  } = ecommerceApp.schemas;
-
-  const warePureObj: Partial<typeof sharedPureWareObj> = {
-    name: string(),
-    brand: string(),
-    price: number(),
-    description: optional(string()),
-  };
-
-  const wareInRel: Partial<typeof sharedWareInRel> = {
-    warType: {
-      schemaName: "wareType",
-      type: "one",
-    },
-  };
-
-  const outRelWare = {};
-
-  addPureModel("ware", warePureObj);
-
-  addOutRelations({
-    schemaName: "ware",
-    outrelation: outRelWare,
-  });
-
-  addInrelations({
-    schemaName: "ware",
-    inrelation: wareInRel as Record<string, InRelation>,
-  });
-  const wareStruct = createStruct("ware");
-
-  type ware = Infer<typeof wareStruct>;
-
-  return db.collection<ware>("ware");
+const warePureObj: Partial<typeof sharedPureWareObj> = {
+  name: string(),
+  brand: string(),
+  price: number(),
+  description: optional(string()),
 };
+
+const wareInRel: Partial<typeof sharedWareInRel> = {
+  warType: {
+    schemaName: "wareType",
+    type: "one",
+  },
+};
+
+const wareOutRel = {};
+
+export const wares = () =>
+  ecommerceApp.odm.setModel(
+    "ware",
+    warePureObj,
+    wareInRel as Record<string, InRelation>,
+    wareOutRel,
+  );
