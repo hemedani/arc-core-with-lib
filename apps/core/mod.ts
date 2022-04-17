@@ -1,12 +1,12 @@
-import {
-  createCoreCountrySchema,
-  createCoreUserSchema,
-} from "../../libs/dbs/schemas/core/mod.ts";
+import { countries, users } from "../../libs/dbs/schemas/core/mod.ts";
 import { ecommerceMainActs } from "../ecommerce/mod.ts";
 import { userInp } from "./declarations/selectInp.ts";
 import { ActFn, lesan, MongoClient, number, object, string } from "./deps.ts";
 
 export const coreApp = lesan();
+
+const user = users();
+const country = countries();
 
 const {
   setAct,
@@ -26,9 +26,6 @@ const client = new MongoClient();
 await client.connect("mongodb://localhost:27017/arc");
 const db = client.database("core");
 
-const country = createCoreCountrySchema();
-const user = createCoreUserSchema();
-
 const addUserValidator = () => {
   return object({
     set: object({
@@ -39,7 +36,7 @@ const addUserValidator = () => {
   });
 };
 
-const addUserFn: ActFn = (body) => {
+const addUserFn: ActFn = async (body) => {
   const acts = getAtcsWithServices();
 
   /*
@@ -55,6 +52,16 @@ const addUserFn: ActFn = (body) => {
   console.log();
   console.log(" ============= ");
   console.groupEnd();
+
+  const {
+    set: { name, age },
+    get,
+  } = body.details;
+
+  await user.insertOne({
+    name,
+    age,
+  });
 
   return {
     what: "what you said",
@@ -120,6 +127,7 @@ setAct({
 //    static: {},
 // });
 
-// setService("ecommerce", "http://localhost:8574/lesan");
-setService("ecommerce", ecommerceMainActs);
-coreApp.runServer({ port: 8585, playground: false, db, typeGeneration: true });
+setService("ecommerce", "http://localhost:8574/lesan");
+// setService("ecommerce", ecommerceMainActs);
+coreApp.odm.setDb(db);
+coreApp.runServer({ port: 8585, playground: false, typeGeneration: true });
