@@ -1,17 +1,14 @@
+import { coreApp } from "../../../../../apps/core/mod.ts";
+import db from "../../../db.ts";
 import {
-  addInrelations,
-  addOutRelations,
-  addPureModel,
   array,
-  createStruct,
   Infer,
   number,
   object,
   optional,
   OutRelation,
   string,
-} from "/home/zahra/work/lesan/mod.ts";
-import db from "../../../db.ts";
+} from "../../../deps.ts";
 import {
   countryOutRel as sharedCountryOutRel,
   pureCountryObj as sharedPureCountryObj,
@@ -38,18 +35,18 @@ export const createCoreCountrySchema = () => {
     },
   };
 
-  addPureModel("country", countryPureObj);
+  coreApp.schemas.addPureModel("country", countryPureObj);
 
-  addOutRelations({
+  coreApp.schemas.addOutRelations({
     schemaName: "country",
     outrelation: outRelCountry as Record<string, OutRelation>,
   });
 
-  addInrelations({
+  coreApp.schemas.addInrelations({
     schemaName: "country",
     inrelation: countryInRel,
   });
-  const countryStruct = createStruct("country");
+  const countryStruct = coreApp.schemas.createStruct("country");
 
   type Country = Infer<typeof countryStruct>;
 
